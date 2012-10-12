@@ -14,14 +14,35 @@ from optparse import OptionParser
 
 parser = OptionParser()
 # There are no options for this program
-# An example of an option is this (for my knowledge)
 # There is one positional argument, which is the url of
 # the restuarant in nosh
+# example of url is http://www.nosh.com/restaurant/2630123
 					
 (options, args) = parser.parse_args()
 
-print args
+url = args[0]
+print "url = " + url
+#print args for testing
+#print args
+
+# 2. fetch the html from the url
+
+#import urllib. Fetches over HTTP
+import urllib
+
+website = urllib.urlopen(url)
+
+#read from website. Store contents
+html_contents = website.read()
+
+#close website
+website.close()
+
+# can print the html. Don't print! Its a lot!
+#print html_contents
+
 print "done"
+
 
 #print 'Number of argument:', len(sys.argv), 'arguments.'
 #print 'Argument List:', str(sys.argv)
