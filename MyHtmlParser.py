@@ -1,6 +1,13 @@
 # My custom html parser. Helps parse for the proper tags
 # I am looking for the <div id="menu-item-list"> start tag
 # That tag holds all the menu item information
+# The <div class="ow-check-in-mi"> is the start tag before
+# the name of the item
+# The <div class="ow-check-in-review"> is the start tag for the 
+# description of the food time. BE CAREFUL. User Reviews can
+# replace this. Check for a <a href="/user/741001"> tag right after
+# It might mean that it is a user review
+
 
 
 #get HTMLParser base class
