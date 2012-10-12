@@ -40,11 +40,18 @@ website.close()
 
 # can print the html. Don't print! Its a lot!
 #print html_contents
-import MyHtmlParser
+#import MyHtmlParser
+
+#import BeautifulSoup! This is the BeautifulSoup4 Beta.
+#from bs4 import BeautifulSoup
+
+#import BeautifulSoup! This is BeautifulSoup3
+from BeautifulSoup import BeautifulSoup
 
 #get parser
-parser = MyHtmlParser.MyHtmlParser()
-parser.feed(html_contents)
+#My parser
+#parser = MyHtmlParser.MyHtmlParser()
+#parser.feed(html_contents)
 
 
 
