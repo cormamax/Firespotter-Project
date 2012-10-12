@@ -56,13 +56,28 @@ import re
 # use BS.findAll to find all tags that are a menu item
 # and have the proper attributes
 
+soup = BeautifulSoup(''.join(html_contents))
+# find all tags that = a and attribute is regex "/menuitem/... wher
+# the strings in the language "/menuitem/"
+tags = soup.findAll('a', href=re.compile("^/menuitem/"))
 
+#remove image tags. They have the same href.
+for a in tags:
+	children = a.findChildren()
+	if (len(children) > 0):
+		tags.remove(a)
 
+#for a in tags:
+	#print a
+	
+# now get the food description
+soup = BeautifulSoup(''.join(html_contents))
 
+reviews = soup.findAll('div', attrs={"class" : 'ow-check-in-review'})
 
-
-
-
+for a in reviews:
+	print a
+	
 
 #example
 #doc = ['<html><head><title>Page title</title></head>',
