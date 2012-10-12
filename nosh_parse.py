@@ -42,11 +42,37 @@ website.close()
 #print html_contents
 #import MyHtmlParser
 
+
+# 3. Parse the html!
 #import BeautifulSoup! This is the BeautifulSoup4 Beta.
 #from bs4 import BeautifulSoup
 
 #import BeautifulSoup! This is BeautifulSoup3
 from BeautifulSoup import BeautifulSoup
+#import regular expression library
+import re
+
+# steps to do this. 
+# use BS.findAll to find all tags that are a menu item
+# and have the proper attributes
+
+
+
+
+
+
+
+
+
+#example
+#doc = ['<html><head><title>Page title</title></head>',
+#       '<body><p id="firstpara" align="center">This is paragraph <b>one</b>.',
+#       '<p id="secondpara" align="blah">This is paragraph <b>two</b>.',
+#       '</html>']
+#soup = BeautifulSoup(''.join(html_contents))
+
+#print soup.prettify()
+
 
 #get parser
 #My parser
