@@ -40,6 +40,14 @@ website.close()
 
 # can print the html. Don't print! Its a lot!
 #print html_contents
+import MyHtmlParser
+
+#get parser
+parser = MyHtmlParser.MyHtmlParser()
+parser.feed(html_contents)
+
+
+
 
 print "done"
 
