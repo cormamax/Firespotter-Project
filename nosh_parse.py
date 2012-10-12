@@ -12,17 +12,15 @@
 # Use OptionParer from optparse
 from optparse import OptionParser
 
-
-
 parser = OptionParser()
-parser.add_option("-f", "--file", dest="filename", 
-					help="write report to FILE", metavar="FILE")
-parser.add_option("-q", "--quiet",
-					action="store_false", dest="verbose", default=True,
-					help="don't print status messages to stdout")
+# There are no options for this program
+# An example of an option is this (for my knowledge)
+# There is one positional argument, which is the url of
+# the restuarant in nosh
 					
 (options, args) = parser.parse_args()
 
+print args
 print "done"
 
 #print 'Number of argument:', len(sys.argv), 'arguments.'
