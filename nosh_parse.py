@@ -64,6 +64,60 @@ soup = BeautifulSoup(''.join(html_contents))
 # find all tags that = a and attribute is regex "/menuitem/... wher
 # the strings in the language "/menuitem/"
 
+
+#get ids
+items = soup.findChildren('div', id=re.compile("^item-"))
+
+#get items and reviews
+names = []
+reviews = []
+i = 0;
+while i < len(items):
+	my_table = items[i]
+	name_row = my_table.findChildren('div', attrs={"class" : 'ow-check-in-mi'})
+	# get name
+	for a in name_row:
+		#You are now at each child in this row
+		names.extend(a.contents[0])
+		print names[i]
+	
+	# get review
+	review_row = my_table.findChildren('div', attrs={"class" : 'ow-check-in-review'})
+	print review_row
+	#print len(review_row)
+	if (len(review_row) > 0):
+		for a in review_row:
+			reviews.extend(a.contents[0])
+			#print a.contents[0]
+	else:
+		reviews.extend("")
+		
+	i = i + 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """
 tags = soup.findAll('td', attrs={"class" : 'ow-check-in-m'})
 
@@ -74,19 +128,51 @@ for a in tags:
 	print ""
 """
 
-
+"""
 #find first object in the menu
 #tags = soup.find('td', attrs={"class" : 'ow-check-in-m'})
-tags = soup.find('div', id="menu-item-list")
-#print tags
-#start searching!
+tags = soup.findAll('div', id=re.compile("^item-"))
+print len(tags)
 
-#found all items
+#Search the menu list for the item ids. Get a list of those
+ids = []
+
+
+i = 0
+while i < len(tags):
+	temp = tags[i]['id']
+	print temp
+	#print ""
+	ids.extend(temp)
+	i = i + 1
+
+print len(ids)
+
+while i < len(ids):
+	print ids[i].string
+	
+"""
+
+
+"""
+#found all items. Get the names of them!
 item = tags.findAllNext('div', attrs={"class" : 'ow-check-in-mi'})
 i = 0
+item_names = []
 while i < len(item):
-	print item[i].contents[0].string
+	temp = item[i].contents[0].contents	
+	item_names.extend(temp)
+	print item_names[i]
 	i = i + 1
+	
+#now search for the review!
+i = 0
+while i < len(item)
+	name = tags.find
+	
+"""	
+	
+	
 #i = 0
 #temp = soup.find('div', )
 #print temp
@@ -124,11 +210,11 @@ for a in tags:
 	if (len(children) > 0):
 		tags.remove(a)
 
-#for a in tags:
-#	print a
+for a in tags:
+	print a
 	
 # now get the food description
-soup = BeautifulSoup(''.join(html_contents))
+#soup = BeautifulSoup(''.join(html_contents))
 #get parent of description
 reviews = soup.findAll('div', attrs={"class" : 'ow-check-in-review'})
 desc = []
@@ -141,7 +227,7 @@ for a in reviews:
 		
 for a in desc:
 	print a
-"""
+"""	
 
 #get parser
 #My parser
