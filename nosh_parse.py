@@ -87,17 +87,25 @@ while i < len(items):
 	#print len(review_row)
 	if (len(review_row) > 0):
 		for a in review_row:
-			print a.contents[1].contents[0]
-			reviews.extend(a.contents[1].contents[0])
+			temp = a.contents[1].contents[0]
+			print temp
+			reviews.extend(temp)
 	else:
-		reviews.extend("")
+		reviews.extend('')
 		
 	i = i + 1
 
 
+print "size names"
+print len(names)
+print "size reviews"
+print len(reviews)
 
-
-
+#for a in names:
+#	print a
+	
+#for a in reviews:
+#	print a
 
 
 
