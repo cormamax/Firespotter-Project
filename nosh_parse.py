@@ -21,9 +21,13 @@ parser = OptionParser()
 (options, args) = parser.parse_args()
 
 url = args[0]
-print "url = " + url
-#print args for testing
-#print args
+#print "url = " + url
+
+######
+#Do error handling for the number of arguments
+
+######
+
 
 # 2. fetch the html from the url
 
@@ -59,8 +63,61 @@ import re
 soup = BeautifulSoup(''.join(html_contents))
 # find all tags that = a and attribute is regex "/menuitem/... wher
 # the strings in the language "/menuitem/"
-tags = soup.findAll('a', href=re.compile("^/menuitem/"))
 
+"""
+tags = soup.findAll('td', attrs={"class" : 'ow-check-in-m'})
+
+for a in tags:
+	child = a.findChildren()
+	print a
+	#print child
+	print ""
+"""
+
+
+#find first object in the menu
+#tags = soup.find('td', attrs={"class" : 'ow-check-in-m'})
+tags = soup.find('div', id="menu-item-list")
+#print tags
+#start searching!
+
+#found all items
+item = tags.findAllNext('div', attrs={"class" : 'ow-check-in-mi'})
+i = 0
+while i < len(item):
+	print item[i].contents[0].string
+	i = i + 1
+#i = 0
+#temp = soup.find('div', )
+#print temp
+#print len(item)
+#while i < len(item):
+#	temp = soup.find(item[i].body)
+#	i = i + 1
+	
+#now look for description
+#desc = tags.findAllNext('div', attrs={"class" : 'ow-check-in-review'})
+#for a in desc:
+#	print a
+
+#print item
+#print len(item)
+#print ""
+#while a < len(tags):
+#	item = tags.findAllNext('div', attrs={"class" : 'ow-check-in-mi'})
+#	print item
+#	a = a + 1
+	#if (item)
+		
+
+#print tags
+
+
+
+
+"""
+tags = soup.findAll('a', href=re.compile("^/menuitem/"))
+#tags = soup.findAll('td', attrs={"class" : 'ow-check-in-review'})
 #remove image tags. They have the same href.
 for a in tags:
 	children = a.findChildren()
@@ -68,26 +125,23 @@ for a in tags:
 		tags.remove(a)
 
 #for a in tags:
-	#print a
+#	print a
 	
 # now get the food description
 soup = BeautifulSoup(''.join(html_contents))
-
+#get parent of description
 reviews = soup.findAll('div', attrs={"class" : 'ow-check-in-review'})
-
+desc = []
+print "review size = "
+print len(reviews)
 for a in reviews:
+	child = a.findChildren()
+	desc.extend(child)
+	#print a
+		
+for a in desc:
 	print a
-	
-
-#example
-#doc = ['<html><head><title>Page title</title></head>',
-#       '<body><p id="firstpara" align="center">This is paragraph <b>one</b>.',
-#       '<p id="secondpara" align="blah">This is paragraph <b>two</b>.',
-#       '</html>']
-#soup = BeautifulSoup(''.join(html_contents))
-
-#print soup.prettify()
-
+"""
 
 #get parser
 #My parser
