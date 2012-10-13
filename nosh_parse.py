@@ -79,7 +79,7 @@ while i < len(items):
 	for a in name_row:
 		#You are now at each child in this row
 		names.extend(a.contents[0])
-		print names[i]
+		#print names[i]
 	
 	# get review
 	review_row = my_table.findChildren('div', attrs={"class" : 'ow-check-in-review'})
@@ -88,7 +88,7 @@ while i < len(items):
 	if (len(review_row) > 0):
 		for a in review_row:
 			temp = a.contents[1].contents[0]
-			print temp
+			#print temp
 			reviews.extend(temp)
 	else:
 		reviews.extend('')
@@ -96,16 +96,25 @@ while i < len(items):
 	i = i + 1
 
 
-print "size names"
-print len(names)
-print "size reviews"
-print len(reviews)
+#print "size names"
+#print len(names)
+#print "size reviews"
+#print len(reviews)
 
-#for a in names:
-#	print a
+for a in names:
+	print a
 	
 #for a in reviews:
 #	print a
+
+# 4. Write to a csv file
+import csv
+
+#examples
+with open('some.csv', 'wb') as f:
+	writer = csv.writer(f)
+	writer.writerows(names)
+
 
 
 
