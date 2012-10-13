@@ -83,12 +83,12 @@ while i < len(items):
 	
 	# get review
 	review_row = my_table.findChildren('div', attrs={"class" : 'ow-check-in-review'})
-	print review_row
+	#print review_row
 	#print len(review_row)
 	if (len(review_row) > 0):
 		for a in review_row:
-			reviews.extend(a.contents[0])
-			#print a.contents[0]
+			print a.contents[1].contents[0]
+			reviews.extend(a.contents[1].contents[0])
 	else:
 		reviews.extend("")
 		
