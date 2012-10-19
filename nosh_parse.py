@@ -19,18 +19,15 @@ parser = OptionParser()
 # example of url is http://www.nosh.com/restaurant/2630123
 					
 (options, args) = parser.parse_args()
-
 url = args[0]
-print url
 
 ######
 #Do error handling for the number of arguments
-
+#
 ######
 
 
 # 2. fetch the html from the url
-
 #import urllib. Fetches over HTTP
 import urllib
 
@@ -42,30 +39,16 @@ html_contents = website.read()
 #close website
 website.close()
 
-# can print the html. Don't print! Its a lot!
-#print html_contents
-#import MyHtmlParser
-
-
 # 3. Parse the html!
-#import BeautifulSoup! This is the BeautifulSoup4 Beta.
-#from bs4 import BeautifulSoup
-
 #import BeautifulSoup! This is BeautifulSoup3
 from BeautifulSoup import BeautifulSoup
+
 #import regular expression library
 import re
 
-# steps to do this. 
-# use BS.findAll to find all tags that are a menu item
-# and have the proper attributes
-
 soup = BeautifulSoup(''.join(html_contents))
-# find all tags that = a and attribute is regex "/menuitem/... wher
-# the strings in the language "/menuitem/"
 
-
-#get ids
+#get all items in the menu
 items = soup.findChildren('div', id=re.compile("^item-"))
 
 #get items and reviews
@@ -91,46 +74,33 @@ while i < len(items):
 			#print temp
 			reviews.append(temp)
 	else:
+		# if you get here then it means there was no review for the menu item
 		reviews.append('')
-		
+	#increment i	
 	i = i + 1
 
-
-print "size names"
-print len(names)
-print "size reviews"
-print len(reviews)
 # len of names and reviews should be the same
 
-
-for a in names:
-	print a
-	
-for a in reviews:
-	print a
-
 # 4. Write to a csv file
-
+# import the csv file writing library
 import csv
-# get the number of the restaurant from the url
-# you still have url!
-#http://www.nosh.com/restaurant/2630123
+# get the number of the restaurant from the url. You still have url!
+# example: http://www.nosh.com/restaurant/2630123
+# first 31 characters are http://www.nosh.com/restaurant/
+# get the substring of the url with only the number.
 filename = url[31:] + '.csv'
-#print filename
-#filename = 'file.csv'
 with open(filename, 'wb') as csvfile:
-	spamwriter = csv.writer(csvfile, delimiter=' ',
-						quotechar='|', quoting=csv.QUOTE_MINIMAL)
+	writer = csv.writer(csvfile, delimiter=',',
+						quotechar='"')
 	i = 0
 	while (i < len(names)):
 		str1 = names[i]
 		str2 = reviews[i]
 		list = [str1, str2]
-		spamwriter.writerow(list)
-		#spamwriter.writerow(names[i] + reviews[i])
+		writer.writerow(list)
 		i = i + 1
 	
-
+# done!
 
 
 
