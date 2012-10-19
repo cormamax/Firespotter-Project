@@ -21,7 +21,7 @@ parser = OptionParser()
 (options, args) = parser.parse_args()
 
 url = args[0]
-#print "url = " + url
+print url
 
 ######
 #Do error handling for the number of arguments
@@ -78,7 +78,7 @@ while i < len(items):
 	# get name
 	for a in name_row:
 		#You are now at each child in this row
-		names.extend(a.contents[0])
+		names.append(a.contents[0].contents[0])
 		#print names[i]
 	
 	# get review
@@ -89,179 +89,51 @@ while i < len(items):
 		for a in review_row:
 			temp = a.contents[1].contents[0]
 			#print temp
-			reviews.extend(temp)
+			reviews.append(temp)
 	else:
-		reviews.extend('')
+		reviews.append('')
 		
 	i = i + 1
 
 
-#print "size names"
-#print len(names)
-#print "size reviews"
-#print len(reviews)
+print "size names"
+print len(names)
+print "size reviews"
+print len(reviews)
+# len of names and reviews should be the same
+
 
 for a in names:
 	print a
 	
-#for a in reviews:
-#	print a
+for a in reviews:
+	print a
 
 # 4. Write to a csv file
+
 import csv
-
-#examples
-with open('some.csv', 'wb') as f:
-	writer = csv.writer(f)
-	writer.writerows(names)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
-tags = soup.findAll('td', attrs={"class" : 'ow-check-in-m'})
-
-for a in tags:
-	child = a.findChildren()
-	print a
-	#print child
-	print ""
-"""
-
-"""
-#find first object in the menu
-#tags = soup.find('td', attrs={"class" : 'ow-check-in-m'})
-tags = soup.findAll('div', id=re.compile("^item-"))
-print len(tags)
-
-#Search the menu list for the item ids. Get a list of those
-ids = []
-
-
-i = 0
-while i < len(tags):
-	temp = tags[i]['id']
-	print temp
-	#print ""
-	ids.extend(temp)
-	i = i + 1
-
-print len(ids)
-
-while i < len(ids):
-	print ids[i].string
+# get the number of the restaurant from the url
+# you still have url!
+#http://www.nosh.com/restaurant/2630123
+filename = url[31:] + '.csv'
+#print filename
+#filename = 'file.csv'
+with open(filename, 'wb') as csvfile:
+	spamwriter = csv.writer(csvfile, delimiter=' ',
+						quotechar='|', quoting=csv.QUOTE_MINIMAL)
+	i = 0
+	while (i < len(names)):
+		str1 = names[i]
+		str2 = reviews[i]
+		list = [str1, str2]
+		spamwriter.writerow(list)
+		#spamwriter.writerow(names[i] + reviews[i])
+		i = i + 1
 	
-"""
-
-
-"""
-#found all items. Get the names of them!
-item = tags.findAllNext('div', attrs={"class" : 'ow-check-in-mi'})
-i = 0
-item_names = []
-while i < len(item):
-	temp = item[i].contents[0].contents	
-	item_names.extend(temp)
-	print item_names[i]
-	i = i + 1
-	
-#now search for the review!
-i = 0
-while i < len(item)
-	name = tags.find
-	
-"""	
-	
-	
-#i = 0
-#temp = soup.find('div', )
-#print temp
-#print len(item)
-#while i < len(item):
-#	temp = soup.find(item[i].body)
-#	i = i + 1
-	
-#now look for description
-#desc = tags.findAllNext('div', attrs={"class" : 'ow-check-in-review'})
-#for a in desc:
-#	print a
-
-#print item
-#print len(item)
-#print ""
-#while a < len(tags):
-#	item = tags.findAllNext('div', attrs={"class" : 'ow-check-in-mi'})
-#	print item
-#	a = a + 1
-	#if (item)
-		
-
-#print tags
 
 
 
 
-"""
-tags = soup.findAll('a', href=re.compile("^/menuitem/"))
-#tags = soup.findAll('td', attrs={"class" : 'ow-check-in-review'})
-#remove image tags. They have the same href.
-for a in tags:
-	children = a.findChildren()
-	if (len(children) > 0):
-		tags.remove(a)
-
-for a in tags:
-	print a
-	
-# now get the food description
-#soup = BeautifulSoup(''.join(html_contents))
-#get parent of description
-reviews = soup.findAll('div', attrs={"class" : 'ow-check-in-review'})
-desc = []
-print "review size = "
-print len(reviews)
-for a in reviews:
-	child = a.findChildren()
-	desc.extend(child)
-	#print a
-		
-for a in desc:
-	print a
-"""	
-
-#get parser
-#My parser
-#parser = MyHtmlParser.MyHtmlParser()
-#parser.feed(html_contents)
-
-
-
-
-print "done"
-
-
-#print 'Number of argument:', len(sys.argv), 'arguments.'
-#print 'Argument List:', str(sys.argv)
-
-
-#getopt.getopt(args, options[, long_options])
 
 
 
