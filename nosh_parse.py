@@ -7,6 +7,13 @@
 #	Put the menu item name as the first value in the csv row, 
 #	and the description (if it exists), as the second value.
 
+# find and replace function for symbols
+def findAndReplace(string):
+	print string
+	string.replace('&amp;', 'W')
+	string.replace('&#39;', 'Q')
+	print string
+	return
 
 # 1. Get to url from the command line.
 # Use OptionParer from optparse
@@ -25,7 +32,6 @@ url = args[0]
 #Do error handling for the number of arguments
 #
 ######
-
 
 # 2. fetch the html from the url
 #import urllib. Fetches over HTTP
@@ -61,7 +67,10 @@ while i < len(items):
 	# get name
 	for a in name_row:
 		#You are now at each child in this row
-		names.append(a.contents[0].contents[0])
+		str = a.contents[0].contents[0]
+		#str.replace('&','W')
+		names.append(str)
+		#names.append(a.contents[0].contents[0])
 		#print names[i]
 	
 	# get review
