@@ -26,12 +26,17 @@ parser = OptionParser()
 # example of url is http://www.nosh.com/restaurant/2630123
 					
 (options, args) = parser.parse_args()
-url = args[0]
 
 ######
 #Do error handling for the number of arguments
-#
+if (len(args) < 1 or len(args) > 1):
+	import sys
+	sys.exit("To many arguments. \n\
+	An example of the command line should look like: \n\
+	python nosh_parse.py http://www.nosh.com/restuarant/2630123")
 ######
+# get url
+url = args[0]
 
 # 2. fetch the html from the url
 #import urllib. Fetches over HTTP
