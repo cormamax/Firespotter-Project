@@ -66,6 +66,10 @@ items = soup.findChildren('div', id=re.compile("^item-"))
 names = []
 reviews = []
 i = 0;
+
+#import Html parser for &'s and 's
+import HTMLParser
+html = HTMLParser.HTMLParser()
 while i < len(items):
 	my_table = items[i]
 	name_row = my_table.findChildren('div', attrs={"class" : 'ow-check-in-mi'})
@@ -73,7 +77,7 @@ while i < len(items):
 	for a in name_row:
 		#You are now at each child in this row
 		str = a.contents[0].contents[0]
-		#str.replace('&','W')
+		str = html.unescape(str)
 		names.append(str)
 		#names.append(a.contents[0].contents[0])
 		#print names[i]
@@ -85,7 +89,7 @@ while i < len(items):
 	if (len(review_row) > 0):
 		for a in review_row:
 			temp = a.contents[1].contents[0]
-			#print temp
+			#temp = html.unescape(temp)
 			reviews.append(temp)
 	else:
 		# if you get here then it means there was no review for the menu item
