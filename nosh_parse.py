@@ -88,7 +88,7 @@ while i < len(items):
 	#print len(review_row)
 	if (len(review_row) > 0):
 		for a in review_row:
-			temp = a.contents[1].contents[0]
+			temp = a.contents[1].contents[0]#.encode('utf-8')
 			#temp = html.unescape(temp)
 			reviews.append(temp)
 	else:
