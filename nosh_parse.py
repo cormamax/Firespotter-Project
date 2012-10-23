@@ -74,9 +74,9 @@ while i < len(items):
 	my_table = items[i]
 	
 	#get name
-	name = my_table.findNext('div', attrs={"class" : 'ow-check-in-mi'})
-	if (name):
-		name = name.findNext('a', href=re.compile("^/menuitem/"))
+	name_row = my_table.findNext('div', attrs={"class" : 'ow-check-in-mi'})
+	if (name_row):
+		name = name_row.findNext('a', href=re.compile("^/menuitem/"))
 	#str = name.contents[0].contents[0]
 	str = name.string # only 1 child. name.contents[0] also works
 	#print str
@@ -85,8 +85,8 @@ while i < len(items):
 	
 	
 	#get review
-	review = my_table.findNext('div', attrs={"class" : 'ow-check-in-review'})
-	print len(review)
+	review = name_row.findNextSibling('div', attrs={"class" : 'ow-check-in-review'})
+	#print review
 	if (review):
 		#rev_str = review.contents[1].contents[0]
 		review = my_table.findNext('span')
