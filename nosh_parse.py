@@ -72,6 +72,34 @@ import HTMLParser
 html = HTMLParser.HTMLParser()
 while i < len(items):
 	my_table = items[i]
+	
+	#get name
+	name = my_table.findNext('div', attrs={"class" : 'ow-check-in-mi'})
+	if (name):
+		name = name.findNext('a', href=re.compile("^/menuitem/"))
+	#str = name.contents[0].contents[0]
+	str = name.string # only 1 child. name.contents[0] also works
+	#print str
+	str = html.unescape(str)
+	names.append(str)
+	
+	
+	#get review
+	review = my_table.findNext('div', attrs={"class" : 'ow-check-in-review'})
+	print len(review)
+	if (review):
+		#rev_str = review.contents[1].contents[0]
+		review = my_table.findNext('span')
+		if (review):
+			rev_str = review.string # only 1 child. name.contents[0] also works
+			reviews.append(rev_str)
+			#print rev_str
+		else:
+			review.append('')
+	else:
+		reviews.append('')
+	
+	"""
 	name_row = my_table.findChildren('div', attrs={"class" : 'ow-check-in-mi'})
 	# get name
 	for a in name_row:
@@ -94,7 +122,8 @@ while i < len(items):
 	else:
 		# if you get here then it means there was no review for the menu item
 		reviews.append('')
-	#increment i	
+		
+	"""		
 	i = i + 1
 
 # len of names and reviews should be the same
