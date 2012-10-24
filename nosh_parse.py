@@ -80,7 +80,7 @@ while i < len(items):
 	#str = name.contents[0].contents[0]
 	str = name.string # only 1 child. name.contents[0] also works
 	#print str
-	str = html.unescape(str)
+	#str = html.unescape(str)
 	names.append(str)
 	
 	
@@ -92,6 +92,7 @@ while i < len(items):
 		review = my_table.findNext('span')
 		if (review):
 			rev_str = review.string # only 1 child. name.contents[0] also works
+			#rev_str = html.unescape(rev_str)
 			reviews.append(rev_str)
 			#print rev_str
 		else:
